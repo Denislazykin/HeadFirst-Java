@@ -1,4 +1,4 @@
-package main.java.com.HeadFirst.chapter_2.Dog;
+package main.java.com.HeadFirst.chapter_3.Dog;
 
 public class Dog {
     String name;

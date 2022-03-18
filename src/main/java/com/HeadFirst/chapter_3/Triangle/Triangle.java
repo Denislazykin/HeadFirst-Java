@@ -1,4 +1,4 @@
-package main.java.com.HeadFirst.chapter_2.Triangle;
+package main.java.com.HeadFirst.chapter_3.Triangle;
 
 public class Triangle {
     double area;

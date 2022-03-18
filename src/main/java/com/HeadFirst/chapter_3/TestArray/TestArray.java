@@ -1,4 +1,4 @@
-package main.java.com.HeadFirst.chapter_2.TestArray;
+package main.java.com.HeadFirst.chapter_3.TestArray;
 
 public class TestArray {
     public static void main(String[] args) {
