@@ -2,6 +2,7 @@ package main.java.com.HeadFirst.chapter_5.SimpleDotComGame;
 
 import java.io.*;
 import java.util.*;
+
 /*
 Вспомогательный класс
 Знает, как принимать пользовательский ввод из командной строки
