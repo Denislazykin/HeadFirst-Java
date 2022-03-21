@@ -62,7 +62,6 @@ public class GameHelper {
                 }
             }
         }
-
         int x = 0;                                          // Переводим местоположение в символьные координаты
         int row = 0;
         int column = 0;
