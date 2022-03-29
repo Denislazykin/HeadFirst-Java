@@ -11,8 +11,7 @@ public class Test4 {
             System.out.println("Vsem horoshego dnia");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Bil poiman exception " + e);
-        }
-        finally {
+        } finally {
             System.out.println("eto finally block");
         }
     }
