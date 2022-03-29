@@ -8,7 +8,7 @@ public class TestException {
             System.out.println("Начало try");
             doRisky(test);
             System.out.println("Конец try");
-        } catch (Exception se){
+        } catch (Exception se) {
             System.out.println("--- Жуткое исключение ---");
         } finally {
             System.out.println("finally");
@@ -16,7 +16,7 @@ public class TestException {
         System.out.println("Конец main");
     }
 
-    static void doRisky(String test) throws Exception{
+    static void doRisky(String test) throws Exception {
         System.out.println("Начало опасного метода");
         if ("yes".equals(test)) {
             throw new Exception();
