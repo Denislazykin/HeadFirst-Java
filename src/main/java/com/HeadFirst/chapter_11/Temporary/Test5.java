@@ -8,11 +8,9 @@ public class Test5 {
         try {
             FileInputStream fis = new FileInputStream(f);
             System.out.println("Have a good day");
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("We throw exception :" + e);
-        }
-        finally {
+        } finally {
             System.out.println("This is a finaly block");
         }
         System.out.println("Etot kod ne imeet otnosheniya k isklucheniam ");
