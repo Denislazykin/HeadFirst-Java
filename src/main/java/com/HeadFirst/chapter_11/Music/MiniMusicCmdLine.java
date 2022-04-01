@@ -12,7 +12,7 @@ public class MiniMusicCmdLine {
             int note = Integer.parseInt(args[1]);
             mini.play(instrument, note);
         }
-    } // конец main
+    }
 
     public void play(int instrument, int note) {
         try {
@@ -45,6 +45,6 @@ public class MiniMusicCmdLine {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    } // закрываем play
+    }
 }
 
