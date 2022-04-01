@@ -6,7 +6,7 @@ public class MiniMiniMusicApp {
     public static void main(String[] args) {
         MiniMiniMusicApp mini = new MiniMiniMusicApp();
         mini.play();
-    }//  закрываем main
+    }
 
     public void play() {
         try {
@@ -34,5 +34,5 @@ public class MiniMiniMusicApp {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    } // закрываем play
-} // закрываем класс
+    }
+}
