@@ -11,12 +11,12 @@ public class MusicTest1 {
             System.out.println("Мы получили синтезатор");
         } catch (MidiUnavailableException e){
             System.out.println("Fail");
-            //e.getStackTrace();
+            e.getStackTrace();
         }
-    } // закрываем play
+    }
 
     public static void main(String[] args) {
         MusicTest1 mt = new MusicTest1();
         mt.play();
-    } // закрываем main
-} // закрываем класс
+    }
+}
