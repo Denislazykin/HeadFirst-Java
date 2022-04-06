@@ -1,6 +1,6 @@
 package main.java.com.HeadFirst.chapter_15.Run;
 
-public class MyRunnable implements Runnable{
+public class MyRunnable implements Runnable {
     public void run() {
         go();
     }
