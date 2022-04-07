@@ -11,16 +11,20 @@ import java.util.ArrayList;
 
 public class BeatBox {
     JPanel mainPanel;
-    ArrayList<JCheckBox> checkBoxList; //для хранения флажков
+    /*
+     * Переменная для хранения флажком
+     */
+    ArrayList<JCheckBox> checkBoxList;
     Sequencer sequencer;
     Sequence sequence;
     Track track;
     JFrame theFrame;
-    // Названия инструментов для создания меток в пользовательском интерфейсе
+    /*
+     * Названия инструментов для создания меток в пользовательском интерфейсе
+     */
     String[] instrumentNames = {"Bass Drum", "Closed Hi-Hat", "Open Hi-Hat", "Acoustic Snare", "Crash Cymbal",
             "Hand Clap", "High Tom", "Hi Bongo", "Maracas", "Whistle", "Low Conga", "Cowbell", "Vibraslap",
             "Low-mid Tom", "High Agogo", "Open Hi Conga"};
-    // числа представляют собой барабанные клавиши
     int[] instruments = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
 
     public static void main(String[] args) {
@@ -32,80 +36,66 @@ public class BeatBox {
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         BorderLayout layout = new BorderLayout();
         JPanel background = new JPanel(layout);
-        // пустая граница позволяет создать поля между краями панели и местом размещения компонентов
+        /*
+         *  Пустая граница позволяет создать поля между краями панели и местом размещения компонентов
+         */
         background.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
         checkBoxList = new ArrayList<JCheckBox>();
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
-
         JButton start = new JButton("Start");
         start.addActionListener(new MyStartListener());
         buttonBox.add(start);
-
         JButton stop = new JButton("Stop");
         stop.addActionListener(new MyStopListener());
         buttonBox.add(stop);
-
         JButton upTempo = new JButton("Tempo Up");
         upTempo.addActionListener(new MyUpTempoListener());
         buttonBox.add(upTempo);
-
         JButton downTempo = new JButton("Tempo Down");
         downTempo.addActionListener(new MyDownTempoListener());
         buttonBox.add(downTempo);
-
         JButton setRandom = new JButton("Set Random");
         setRandom.addActionListener(new SetRandomListener());
         buttonBox.add(setRandom);
-
         JButton clear = new JButton("Clear");
         clear.addActionListener(new ClearListener());
         buttonBox.add(clear);
-
         JButton serialiseIt = new JButton("SerialiseIt");
         serialiseIt.addActionListener(new MySentListener());
         buttonBox.add(serialiseIt);
-
         JButton restore = new JButton("Restore");
         restore.addActionListener(new MyReadInListener());
         buttonBox.add(restore);
-
-
         Box nameBox = new Box(BoxLayout.Y_AXIS);
         for (int i = 0; i < 16; i++) {
             nameBox.add(new Label(instrumentNames[i]));
         }
-
         background.add(BorderLayout.EAST, buttonBox);
         background.add(BorderLayout.WEST, nameBox);
-
         theFrame.getContentPane().add(background);
-
         GridLayout grid = new GridLayout(16, 16);
         grid.setVgap(1);
         grid.setHgap(2);
         mainPanel = new JPanel(grid);
         background.add(BorderLayout.CENTER, mainPanel);
-
         for (int i = 0; i < 256; i++) {
-            JCheckBox c = new JCheckBox(); // создаем флажки
-            c.setSelected(false);   // присваиваем значение - не установлен
-            checkBoxList.add(c);    // добавляем их в массив
-            mainPanel.add(c);   // добавляем на панель
+            JCheckBox c = new JCheckBox();
+            c.setSelected(false);
+            checkBoxList.add(c);
+            mainPanel.add(c);
         }
         setUpMidi();
-
         theFrame.setBounds(50, 50, 300, 300);
         theFrame.pack();
         theFrame.setVisible(true);
     }
 
     public void setUpMidi() {
-        try { // получаем синтезатор, секвенсор и дорожки
+        try {
             sequencer = MidiSystem.getSequencer();
             sequencer.open();
-            sequence = new Sequence(Sequence.PPQ, 4); // создадим последовательность
-            track = sequence.createTrack(); // создадим трек и свяжем его с последовательностью
+            sequence = new Sequence(Sequence.PPQ, 4);
+            track = sequence.createTrack();
             sequencer.setTempoInBPM(120);
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,18 +103,13 @@ public class BeatBox {
     }
 
     public void buildTrackAndStart() {
-        int[] trackList = null; //создаем массив из 16 элементов, чтобы хранить значения для каждого
-        // инструмента на все 16 тактов
-
-        sequence.deleteTrack(track); //удаляем старую дорожку
-        track = sequence.createTrack(); // создаем новую
-
-        for (int i = 0; i < 16; i++) { //делаем это для каждого из 16 рядов
+        int[] trackList = null;
+        sequence.deleteTrack(track);
+        track = sequence.createTrack();
+        for (int i = 0; i < 16; i++) {
             trackList = new int[16];
-
-            int key = instruments[i]; // задаем клавишу, которая представляет инстумент.
-            // массив содержит MIDI-числа для каждого инструмента
-            for (int j = 0; j < 16; j++) { // делаем это для каждого такта текущего ряда
+            int key = instruments[i];
+            for (int j = 0; j < 16; j++) {
                 JCheckBox jc = (JCheckBox) checkBoxList.get(j + (16 * i));
                 if (jc.isSelected()) {
                     trackList[j] = key;
@@ -132,22 +117,18 @@ public class BeatBox {
                     trackList[j] = 0;
                 }
             }
-
-            makeTracks(trackList); // для этого инструмента и для всех 16 тактов создаем события
-            track.add(makeEvent(176, 1, 127, 0, 16)); // и добавляем их на дорожку
+            makeTracks(trackList);
+            track.add(makeEvent(176, 1, 127, 0, 16));
         }
-
         track.add(makeEvent(192, 9, 1, 0, 15));
         try {
             sequencer.setSequence(sequence);
-            sequencer.setLoopCount(sequencer.LOOP_CONTINUOUSLY); // задаем бесконечный цикл повторений
+            sequencer.setLoopCount(sequencer.LOOP_CONTINUOUSLY);
             sequencer.start();
             sequencer.setTempoInBPM(120);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public class MyStartListener implements ActionListener {
@@ -168,8 +149,7 @@ public class BeatBox {
         @Override
         public void actionPerformed(ActionEvent e) {
             float tempoFactor = sequencer.getTempoFactor();
-            sequencer.setTempoFactor((float) (tempoFactor * 1.03)); // изменим коэффициет темпа синтезатора
-            // 1.0 стандартное значение
+            sequencer.setTempoFactor((float) (tempoFactor * 1.03));
         }
     }
 
@@ -181,7 +161,7 @@ public class BeatBox {
         }
     }
 
-    public class ClearListener implements ActionListener { //сброс установленных флажков
+    public class ClearListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             for (int i = 0; i < 256; i++) {
@@ -190,32 +170,34 @@ public class BeatBox {
         }
     }
 
-    public class SetRandomListener implements ActionListener { // произвольная установка флажков
+    public class SetRandomListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             for (int i = 0; i < 256; i++) {
                 int onOff = (int) (Math.random() * 2);
                 System.out.println(i + " = " + onOff);
                 if (onOff == 1) {
-                    checkBoxList.get(i).setSelected(true);   // присваиваем значение - не установлен
+                    checkBoxList.get(i).setSelected(true);
                 } else {
-                    checkBoxList.get(i).setSelected(false);   // присваиваем значение - не установлен
+                    checkBoxList.get(i).setSelected(false);
                 }
             }
         }
     }
 
-    /*
-     *Метод создает события для одного инструмента за каждый проход цикла для всех 16 тактов.
-     *получив значение из массива для текущего инстумента (0 или 1) можно определить будет или нет
-     *играть инстумент. Если 1, то нужно создать событие и добавить его в дорожку
+    /**
+     * Метод создает события для одного инструмента за каждый проход цикла для всех 16 тактов.
+     * получив значение из массива для текущего инстумента (0 или 1) можно определить будет или нет
+     * играть инстумент. Если 1, то нужно создать событие и добавить его в дорожку
+     *
+     * @param list принимает массив листа
      */
     public void makeTracks(int[] list) {
         for (int i = 0; i < 16; i++) {
             int key = list[i];
             if (key != 0) {
-                track.add(makeEvent(144, 9, key, 100, i)); // создаем события включения и выключения
-                track.add(makeEvent(128, 9, key, 100, i + 1));// и добавляем их в дорожку
+                track.add(makeEvent(144, 9, key, 100, i));
+                track.add(makeEvent(128, 9, key, 100, i + 1));
             }
         }
     }
@@ -245,7 +227,7 @@ public class BeatBox {
             try {
                 JFileChooser fileSave = new JFileChooser();
                 fileSave.showSaveDialog(theFrame);
-                //fileSave.setFileFilter(new FileNameExtensionFilter("Serialization data","ser"));
+                fileSave.setFileFilter(new FileNameExtensionFilter("Serialization data", "ser"));
                 FileOutputStream fileStream = new FileOutputStream(fileSave.getSelectedFile());
                 ObjectOutputStream os = new ObjectOutputStream(fileStream);
                 os.writeObject(checkboxState);
@@ -262,7 +244,7 @@ public class BeatBox {
             try {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.showOpenDialog(theFrame);
-                //fileChooser.setFileFilter(new FileNameExtensionFilter("Serialization data","ser"));
+                fileChooser.setFileFilter(new FileNameExtensionFilter("Serialization data", "ser"));
                 FileInputStream fileIn = new FileInputStream(fileChooser.getSelectedFile());
                 ObjectInputStream is = new ObjectInputStream(fileIn);
                 checkboxState = (boolean[]) is.readObject();
