@@ -28,20 +28,19 @@ public class SimpleChatClient {
         qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         JPanel panel = new JPanel();
         outgoing = new JTextField(20);
-
         JButton sendBtn = new JButton("Отправить");
         sendBtn.addActionListener(new SendButtonListener());
-
         panel.add(qScroller);
         panel.add(outgoing);
         panel.add(sendBtn);
         frame.getContentPane().add(BorderLayout.CENTER, panel);
-
         SetUpNetworking();
-
-        Thread readerThread = new Thread(new IncomingReader()); // запускаем новый поток, используя класс
-        readerThread.start();   // в качестве Runnable (задачи)
-
+        /*
+         * Запускаем новый поток, используя класс
+         * в качестве Runnable (задачи)
+         */
+        Thread readerThread = new Thread(new IncomingReader());
+        readerThread.start();
         frame.setSize(400, 500);
         frame.setVisible(true);
     }
