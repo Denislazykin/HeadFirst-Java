@@ -8,8 +8,7 @@ public class MyRunnable implements Runnable {
     public void go() {
         try {
             Thread.sleep(2000);
-        }
-        catch (InterruptedException ex) {
+        } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
         doMore();
