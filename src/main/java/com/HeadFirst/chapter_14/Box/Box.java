@@ -18,7 +18,6 @@ public class Box implements Serializable {
         Box myBox = new Box();
         myBox.setWeight(50);
         myBox.setHeight(20);
-
         try {
             /*
              * Cоздаём объект FileOutputStream
