@@ -29,7 +29,6 @@ public class TextArea1 implements ActionListener {
         frame.getContentPane().add(BorderLayout.SOUTH, button); // в нижнюю часть добавили кнопку
         frame.setSize(350, 300); // установили размеры
         frame.setVisible(true); // сделали фрейм видимым
-
     }
 
     @Override
