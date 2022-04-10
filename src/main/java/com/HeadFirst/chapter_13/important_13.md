@@ -5,7 +5,7 @@ Frame frame = new JFrame(); //создаем окно \
 JButton button = new JButton("Click me"); //создаем компонент \
 frame.getContentPane().add(BoarderLayout.EAST,button); //добавляем компоненты внутрь фрейма \
 frame.setSize(300, 200); //установим размер \
-frame.setVisible(true); //сделаем фрейм видимым \
+frame.setVisible(true); //сделаем фрейм видимым
 
 Сценарий компоновки:\
 Создаем Панель и добавляем на нее кнопки\
