@@ -2,6 +2,7 @@ package main.java.com.HeadFirst.chapter_2.GuessGame;
 
 public class Player {
     int number;
+
     /*
     Медод для извлечения ответов игроков
      */
