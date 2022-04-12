@@ -5,8 +5,8 @@ public class BeerSong {
         int beerNum = 99;
         String word = "бутылок (бутылки)";
         System.out.println(beerNum + " " + word + " пива на стене");
-        while (beerNum > 0){
-            if (beerNum == 1){
+        while (beerNum > 0) {
+            if (beerNum == 1) {
                 word = "бутылка";
             }
             System.out.println(beerNum + " " + word + " пива на стене");
@@ -16,7 +16,7 @@ public class BeerSong {
             beerNum = beerNum - 1;
             if (beerNum > 1) {
                 System.out.println(beerNum + " " + word + " пива на стене");
-            }else{
+            } else {
                 System.out.println("Нет бутылок пива на стене");
             }
 
