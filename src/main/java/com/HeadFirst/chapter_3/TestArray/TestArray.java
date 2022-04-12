@@ -17,7 +17,7 @@ public class TestArray {
         int ref;
         int y = 0;
 
-        while (y < 4){
+        while (y < 4) {
             ref = index[y];
             System.out.print("острова = ");
             System.out.println(islands[ref]);
