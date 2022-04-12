@@ -6,7 +6,7 @@ public class DrumKitTestDrive {
         d.snare = false;
         d.playSnare();
         d.playTopHat();
-        if (d.snare == true){
+        if (d.snare == true) {
             d.playSnare();
         }
 
