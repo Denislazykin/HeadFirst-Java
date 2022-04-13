@@ -20,9 +20,9 @@ public class TestFormats {
         System.out.println(q);
         System.out.println();
 
-        System.out.println(String.format("%tc" , new Date()));
+        System.out.println(String.format("%tc", new Date()));
         System.out.println();
-        System.out.println(String.format("%tr" , new Date()));
+        System.out.println(String.format("%tr", new Date()));
         System.out.println();
         Date toDay = new Date();
         System.out.println(String.format("%tA, %tB %td", toDay, toDay, toDay));

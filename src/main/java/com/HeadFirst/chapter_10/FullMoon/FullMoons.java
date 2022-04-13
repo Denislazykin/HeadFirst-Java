@@ -6,7 +6,7 @@ public class FullMoons {
     /*
      * количество милисекунд в сутках
      */
-    static int DAY_IM = 1000 * 60 *60 * 24;
+    static int DAY_IM = 1000 * 60 * 60 * 24;
 
     public static void main(String[] args) {
         /*
@@ -16,7 +16,7 @@ public class FullMoons {
         /*
          * установим значение
          */
-        c.set(2020,0,1,15,40);
+        c.set(2020, 0, 1, 15, 40);
         /*
          * получим его в милисекундах
          */
