@@ -35,6 +35,7 @@ public class MiniMusicPlayer1 {
 
     /**
      * Вызваем новый метод, что бы создать сообщение и событие, а затем добавляем результат
+     *
      * @return возвращает событие
      */
     public static MidiEvent makeEvent(int comd, int chan, int one, int two, int tick) {
