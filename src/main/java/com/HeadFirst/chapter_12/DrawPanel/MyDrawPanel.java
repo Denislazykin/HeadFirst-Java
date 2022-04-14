@@ -7,6 +7,6 @@ import java.util.Collections;
 public class MyDrawPanel extends JPanel {
     public void paintComponent(Graphics g) {
         g.setColor(Color.green);
-        g.fillRect(20,50,100,100);
+        g.fillRect(20, 50, 100, 100);
     }
 }
