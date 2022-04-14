@@ -12,7 +12,7 @@ public class Animate {
         gui.go();
     }
 
-    public void go(){
+    public void go() {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         MyDrawP drawP = new MyDrawP();
@@ -24,11 +24,13 @@ public class Animate {
             drawP.repaint();
             try {
                 Thread.sleep(50);
-            } catch (Exception ex){}
+            } catch (Exception ex) {
+            }
         }
     }
-    class MyDrawP extends JPanel{
-        public void paintComponent(Graphics g){
+
+    class MyDrawP extends JPanel {
+        public void paintComponent(Graphics g) {
             g.setColor(Color.white);
             g.fillRect(0, 0, 500, 250);
             g.setColor(Color.blue);
