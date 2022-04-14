@@ -16,11 +16,11 @@ public class MiniMusicPlayer2 implements ControllerEventListener {
         try {
             Sequencer sequencer = MidiSystem.getSequencer();
             sequencer.open();
-			/*
-			 *Регистрируем события синтезатором. Метод, отвечающий за регистрацию, принимает объект
-			 *слушателя и целочисленный массив, представляющий собой список событий ControllerEvent,
-			 *которые нам нужны. Нас интересует только одно событие - № 127
-			 */
+            /*
+             *Регистрируем события синтезатором. Метод, отвечающий за регистрацию, принимает объект
+             *слушателя и целочисленный массив, представляющий собой список событий ControllerEvent,
+             *которые нам нужны. Нас интересует только одно событие - № 127
+             */
             int[] eventsIWant = {127};
             sequencer.addControllerEventListener(this, eventsIWant);
             /*
@@ -47,6 +47,7 @@ public class MiniMusicPlayer2 implements ControllerEventListener {
     /**
      * метод обработки события (из интерфейса слушателя события ControllerEvent)
      * при каждом получении события выводим ссобщение
+     *
      * @param event принимает событие
      */
     public void controlChange(ShortMessage event) {
